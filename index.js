@@ -1,8 +1,10 @@
+/* jshint esversion: 9 */
+
 'use strict';
 const path = require('path');
 const { app, BrowserWindow, Menu, session } = require('electron');
-/// const {autoUpdater} = require('electron-updater');
-const {is} = require('electron-util');
+const { autoUpdater } = require('electron-updater');
+const { is } = require('electron-util');
 const unhandled = require('electron-unhandled');
 const debug = require('electron-debug');
 const contextMenu = require('electron-context-menu');
@@ -10,6 +12,9 @@ const config = require('./config');
 
 const menuEnable = config.get('menuEnable');
 const menu = require('./menu');
+
+const DiscordRPC = require('discord-rpc');
+const { start } = require('repl');
 
 unhandled();
 contextMenu();
@@ -22,14 +27,14 @@ app.setAppUserModelId('com.sin.monkey-type-desktop');
 
 // Uncomment this before publishing your first version.
 // It's commented out as it throws an error if there are no published versions.
-// if (!is.development) {
-// 	const FOUR_HOURS = 1000 * 60 * 60 * 4;
-// 	setInterval(() => {
-// 		autoUpdater.checkForUpdates();
-// 	}, FOUR_HOURS);
-//
-// 	autoUpdater.checkForUpdates();
-// }
+if (!is.development) {
+	const FOUR_HOURS = 1000 * 60 * 60 * 4;
+	setInterval(() => {
+		autoUpdater.checkForUpdates();
+	}, FOUR_HOURS);
+
+	autoUpdater.checkForUpdates();
+}
 
 // Prevent window from being garbage collected
 let mainWindow;
@@ -85,10 +90,50 @@ app.on('activate', async () => {
 	}
 });
 
+const clientId = config.get('discordRPC').clientId;
+const rpc = new DiscordRPC.Client({ transport: 'ipc' });
+const startTimestamp = new Date();
+
+async function setActivity() {
+	if (!rpc || !mainWindow) {
+		return;
+	}
+
+	// You can add your own presence application or presence data in the config.
+	// If you wanted to, you could try to get data from monkey type time left value and set this as the endTimestamp value.
+	rpc.setActivity({
+		details: config.get('discordRPC').RPC.details,
+		state: config.get('discordRPC').RPC.state,
+		largeImageKey: config.get('discordRPC').RPC.largeImageKey,
+		largeImageText: config.get('discordRPC').RPC.largeImageText,
+		//smallImageKey: config.get('discordRPC').RPC.smallImageKey,
+		//smallImageText: config.get('discordRPC').RPC.smallImageText,
+		startTimestamp: startTimestamp
+	});
+}
+
+rpc.on('ready', () => {
+	setActivity();
+    console.log('initial set');
+
+	setInterval(() => {
+		setActivity();
+        console.log('refresh set');
+	}, 15e3);
+});
+
+rpc.login({ clientId }).catch(console.error);
+
 (async () => {
 	await app.whenReady();
 	menuEnable ? Menu.setApplicationMenu(menu) : Menu.setApplicationMenu(null);
 	mainWindow = await createMainWindow();
+
+	//session.defaultSession.cookies.get({}).then(cookies => console.log(cookies));
 	
-	session.defaultSession.cookies.get({}).then(cookies => console.log(cookies));
+	// A more complete and custom config system will be implemented but at the moment you can just transfer your config cookie.
+	if (config.get('configCookieOverwrite').length > 50) {
+		let configCookie = { name: 'config', value: config.get('configCookieOverwrite') };
+		session.defaultSession.cookies.set(configCookie).then(() => {}, (error) => console.error(error));
+	}
 })();
