@@ -21,5 +21,8 @@ You can set your own rich presence values with that information.
 
 Currently, only Windows builds are in the release section, however, you can build Linux or Mac using the `$ npm run dist` script along side your platforms flag; `--windows`, `--linux` or `--mac`.
 
+### Other Info
+Feel free to run lint yourself via `$ yarn xo`.
+
 ### License
 MIT
