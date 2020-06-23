@@ -8,6 +8,8 @@
 	"author": "Sin",
 	"scripts": {
 		"postinstall": "electron-builder install-app-deps",
+		"lint": "xo",
+		"test": "npm run lint",
 		"start": "electron .",
 		"pack": "electron-builder --dir",
 		"dist": "electron-builder --macos --linux --windows",
