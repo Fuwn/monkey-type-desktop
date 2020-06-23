@@ -9,24 +9,24 @@ module.exports = new Store({
 		debugEnable: false,
 		menuEnable: true,
 		discordRPC: {
-			clientId: "722389325483999243",
+			clientId: '722389325483999243',
 			timeEnable: true,
 			RPC: {
-				details: "Typing on Monkey Type",
-				state: "Desktop Application Beta",
+				details: 'Typing on Monkey Type',
+				state: 'Desktop Application Beta',
 				startTimestamp: 0,
 				endTimestamp: 0,
-				smallImageText: "",
-				smallImageKey: "",
-				largeImageText: "Monkey Type",
-				largeImageKey: "icon",
+				smallImageText: '',
+				smallImageKey: '',
+				largeImageText: 'Monkey Type',
+				largeImageKey: 'icon',
 				refreshTime: 15,
 				instance: true,
-				match: "",
-				party: "",
-				partyMax: "",
-				join: "",
-				spectate: ""
+				match: '',
+				party: '',
+				partyMax: '',
+				join: '',
+				spectate: ''
 			}
 		},
 		dontTouch: {
