@@ -8,6 +8,7 @@
 	"author": "Sin",
 	"scripts": {
 		"postinstall": "electron-builder install-app-deps",
+		"test": "echo \"Passed\"",
 		"start": "electron .",
 		"pack": "electron-builder --dir",
 		"dist": "electron-builder --macos --linux --windows",
