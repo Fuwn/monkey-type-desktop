@@ -171,11 +171,11 @@ const otherTemplate = [
 const template = process.platform === 'darwin' ? macosTemplate : otherTemplate;
 
 // Ideally, this should be un-commented and only pushed if in debug mode, but I find it pretty useful and chose to keep it in release.
-//if (is.development) {
-	template.push({
-		label: 'Debug',
-		submenu: debugSubmenu
-	});
-//}
+// if (is.development)
+
+template.push({
+	label: 'Debug',
+	submenu: debugSubmenu
+});
 
 module.exports = Menu.buildFromTemplate(template);
