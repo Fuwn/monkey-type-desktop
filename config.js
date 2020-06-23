@@ -5,17 +5,17 @@ module.exports = new Store({
 	defaults: {
 		debugEnable: false,
 		menuEnable: true,
-		configCookieOverwrite: "",
+		configCookieOverwrite: '',
 		discordRPC: {
-			clientId: "722389325483999243",
+			clientId: '722389325483999243',
 			RPC: {
-				details: "Typing on Monkey Type",
-				state: "Desktop Application Beta",
-				smallImageText: "",
-				smallImageKey: "",
-				largeImageText: "Monkey Type",
-				largeImageKey: "icon",
-				refreshTime: 15,
+				details: 'Typing on Monkey Type',
+				state: 'Desktop Application Beta',
+				smallImageText: '',
+				smallImageKey: '',
+				largeImageText: 'Monkey Type',
+				largeImageKey: 'icon',
+				refreshTime: 15
 			}
 		},
 		dontTouch: {

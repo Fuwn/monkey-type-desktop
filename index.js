@@ -58,7 +58,7 @@ const createMainWindow = async () => {
 		mainWindow = undefined;
 	});
 
-	await win.loadURL("https://monkey-type.com/");
+	await win.loadURL('https://monkey-type.com/');
 
 	return win;
 };
@@ -106,19 +106,19 @@ async function setActivity() {
 		state: config.get('discordRPC').RPC.state,
 		largeImageKey: config.get('discordRPC').RPC.largeImageKey,
 		largeImageText: config.get('discordRPC').RPC.largeImageText,
-		//smallImageKey: config.get('discordRPC').RPC.smallImageKey,
-		//smallImageText: config.get('discordRPC').RPC.smallImageText,
+		// smallImageKey: config.get('discordRPC').RPC.smallImageKey,
+		// smallImageText: config.get('discordRPC').RPC.smallImageText,
 		startTimestamp: startTimestamp
 	});
 }
 
 rpc.on('ready', () => {
 	setActivity();
-    console.log('initial set');
+    console.log('DiscordRPC: Initial set completed.');
 
 	setInterval(() => {
 		setActivity();
-        console.log('refresh set');
+        console.log('DiscordRPC: Refresh set completed.');
 	}, 15e3);
 });
 
@@ -129,11 +129,11 @@ rpc.login({ clientId }).catch(console.error);
 	menuEnable ? Menu.setApplicationMenu(menu) : Menu.setApplicationMenu(null);
 	mainWindow = await createMainWindow();
 
-	//session.defaultSession.cookies.get({}).then(cookies => console.log(cookies));
-	
+	// session.defaultSession.cookies.get({}).then(cookies => console.log(cookies));
+
 	// A more complete and custom config system will be implemented but at the moment you can just transfer your config cookie.
 	if (config.get('configCookieOverwrite').length > 50) {
-		let configCookie = { name: 'config', value: config.get('configCookieOverwrite') };
-		session.defaultSession.cookies.set(configCookie).then(() => {}, (error) => console.error(error));
+		const configCookie = { name: 'config', value: config.get('configCookieOverwrite') };
+		session.defaultSession.cookies.set(configCookie).then(() => {}, error => console.error(error));
 	}
 })();
