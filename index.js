@@ -2,7 +2,7 @@
 
 'use strict';
 const path = require('path');
-const { app, BrowserWindow, Menu, session } = require('electron');
+const { app, BrowserWindow, Menu, session, globalShortcut } = require('electron');
 const { autoUpdater } = require('electron-updater');
 const { is } = require('electron-util');
 const unhandled = require('electron-unhandled');
@@ -94,7 +94,7 @@ const clientId = config.get('discordRPC').clientId;
 const rpc = new DiscordRPC.Client({ transport: 'ipc' });
 const startTimestamp = new Date();
 
-async function setActivity() {
+function setActivity() {
 	if (!rpc || !mainWindow) {
 		return;
 	}
@@ -122,7 +122,8 @@ rpc.on('ready', () => {
 	}, 15e3);
 });
 
-rpc.login({ clientId }).catch(console.error);
+if (config.get('discordRPCEnable'))
+    rpc.login({ clientId }).catch(console.error);
 
 (async () => {
 	await app.whenReady();
