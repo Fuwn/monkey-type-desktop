@@ -6,6 +6,7 @@ module.exports = new Store({
 		debugEnable: false,
 		menuEnable: true,
 		configCookieOverwrite: '',
+        discordRPCEnable: true,
 		discordRPC: {
 			clientId: '722389325483999243',
 			RPC: {
