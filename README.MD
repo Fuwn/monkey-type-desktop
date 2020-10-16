@@ -16,7 +16,7 @@ You can set your own rich presence values with that information.
 3. `$ npm run start` to start the application.
 
 ## Installation
-1. Go to [releases](https://github.com/8cy/monkey-type-desktop/releases)
+1. Go to [releases](https://github.com/fuwn/monkey-type-desktop/releases)
 2. Download
 
 Currently, only Windows builds are in the release section, however, you can build Linux or Mac using the `$ npm run dist` script along side your platforms flag; `--windows`, `--linux` or `--mac`.
