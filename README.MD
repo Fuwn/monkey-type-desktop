@@ -1,3 +1,8 @@
+# Notice
+Despite still being functional, this project is unmaintained for the most part.
+
+If you are using this project for the sole purpose of having a Discord RPC for Monkeytype, I suggest you check out the official (?) [PreMiD plugin](https://premid.app/store/presences/Monkeytype).
+
 # Monkey Type, but for desktop!
 Basically title.
 
