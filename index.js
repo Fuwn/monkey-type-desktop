@@ -58,7 +58,7 @@ const createMainWindow = async () => {
 		mainWindow = undefined;
 	});
 
-	await win.loadURL('https://monkey-type.com/');
+	await win.loadURL('https://monkeytype.com/');
 
 	return win;
 };
